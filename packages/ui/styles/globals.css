@@ -6,6 +6,7 @@
   :root {
     --background: 15 46% 98%;
     --foreground: 15 52% 4%;
+    --platform-background: 0 4% 95%;
     --muted: 15 37% 93%;
     --muted-foreground: 15 14% 29%;
     --popover: 15 46% 98%;
@@ -30,6 +31,7 @@
   .dark {
     --background: 15 49% 4%;
     --foreground: 15 25% 99%;
+    --platform-background: 15 49% 4%;
     --muted: 15 37% 7%;
     --muted-foreground: 15 14% 71%;
     --popover: 15 49% 4%;

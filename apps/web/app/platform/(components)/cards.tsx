@@ -47,6 +47,8 @@ import {
 } from "lucide-react";
 
 import {
+  CameraIcon,
+  ChatBubbleIcon,
   ChevronDownIcon,
   CircleIcon,
   DotFilledIcon,
@@ -87,27 +89,45 @@ import { Icons } from "@/components/icons";
 import { Textarea } from "@ui/components/ui/textarea";
 import { ClockIcon } from "lucide-react";
 import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@ui/components/ui/navigation-menu";
+import { Badge } from "@ui/components/ui/badge";
 
 export function Access() {
   return (
-    <div>
-      <Card className="rounded-lg shadow-md p-4">
-        <h2 className="text-lg font-semibold">Quick Access</h2>
-        <div className="grid gap-2 mt-2">
-          <Button variant="ghost" className="flex items-center gap-2">
-            <Bird className="w-5 h-5" />
-            <span>View Courses</span>
-          </Button>
-          <Button variant="ghost" className="flex items-center gap-2">
-            <Rabbit className="w-5 h-5" />
-            <span>View Study Groups</span>
-          </Button>
-          <Button variant="ghost" className="flex items-center gap-2">
-            <Mic className="w-5 h-5" />
-            <span>View Discussions</span>
-          </Button>
-        </div>
-      </Card>
+    <div className="flex flex-col justify-center mt-3 border-b pb-2">
+      <h2 className="text-lg font-semibold pl-4 -mb-2">Quick Access</h2>
+      <div className="rounded-lg p-4 flex flex-row gap-3">
+        <Button variant="ghost" className="flex items-center shadow-md">
+          <span className="text-sm">View Courses</span>
+        </Button>
+        <Button variant="ghost" className="flex items-center shadow-md">
+          <span className="text-sm">View Study Groups</span>
+        </Button>
+        <Button variant="ghost" className="flex items-center shadow-md">
+          <span className="text-sm">View Discussions</span>
+        </Button>
+        <Button variant="ghost" className="flex items-center shadow-md">
+          <span className="text-sm">Create Courses</span>
+        </Button>
+        <Button variant="ghost" className="flex items-center shadow-md">
+          <span className="text-sm">Create Study Groups</span>
+        </Button>
+        <Button variant="ghost" className="flex items-center shadow-md">
+          <span className="text-sm">Create Discussions</span>
+        </Button>
+        <NavigationMenu className="rounded-lg flex items-center shadow-md">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>+ Show more</NavigationMenuTrigger>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
     </div>
   );
 }
@@ -138,14 +158,10 @@ export function Create() {
 
 export function Search() {
   return (
-    <div>
-      <Card className=" rounded-lg shadow-md p-4">
-        <h2 className="text-lg font-semibold">Search</h2>
-        <div className="grid gap-2 mt-2">
-          <Label htmlFor="search">Search</Label>
-          <Input id="search" type="text" placeholder="Search" />
-        </div>
-      </Card>
+    <div className="min-w-[420px] w-[50vw]">
+      <div className="grid gap-2 mt-2">
+        <Input id="search" type="text" placeholder="Search" />
+      </div>
     </div>
   );
 }
@@ -153,51 +169,41 @@ export function Search() {
 export function ThreeRecentStudyGroups() {
   return (
     <div>
-      <Card className="rounded-lg shadow-md p-4">
-        <h2 className="text-lg font-semibold">Recently Active Study Groups</h2>
-        <div className="grid mt-2">
-          <Button
-            variant="ghost"
-            className="flex w-full justify-between items-center group"
-          >
-            <div className="flex items-center transition-all duration-1000">
-              <DotFilledIcon className="w-5 h-5 text-blue-500" />
-              <span className="group-hover:hidden">CS 161 Study Group</span>
-              <span className="group-hover:opacity-100 opacity-0">
-                Join CS 161 Study Group
-              </span>
-            </div>
-            <EnterIcon className="w-5 h-5 text-primary/0 group-hover:text-primary/100" />
-          </Button>
-          <Button
-            variant="ghost"
-            className="flex w-full justify-between items-center group"
-          >
-            <div className="flex items-center transition-all duration-1000">
-              <DotFilledIcon className="w-5 h-5 text-red-500" />
-              <span className="group-hover:hidden">MTH 251 Study Group</span>
-              <span className="group-hover:opacity-100 opacity-0">
-                Join MTH 251 Study Group
-              </span>
-            </div>
-            <EnterIcon className="w-5 h-5 text-primary/0 group-hover:text-primary/100" />
-          </Button>
-          <Button
-            variant="ghost"
-            className="flex w-full justify-between items-center group"
-          >
-            <div className="flex items-center">
-              <DotFilledIcon className="w-5 h-5 text-green-500" />
-              <span className="group-hover:hidden">WR 121 Writing Group</span>
-              <span className="group-hover:opacity-100 opacity-0">
-                Join WR 121 Writing Group
-              </span>
-            </div>
-            <EnterIcon className="w-5 h-5 text-primary/0 group-hover:text-primary/100" />
-          </Button>
-        </div>
-      </Card>
+      <h2 className="text-lg font-semibold mb-2">
+        Recently Active Study Groups
+      </h2>
+      <div className="flex flex-row gap-4">
+        <SessionCard />
+        <SessionCard />
+        <SessionCard />
+      </div>
     </div>
+  );
+}
+
+export function SessionCard() {
+  return (
+    <>
+      <main>
+        <Card>
+          <CardHeader>
+            <div className="flex justify-between items-center w-full">
+              <div className="flex gap-2">
+                <CameraIcon className="w-5 h-5" />
+                <ChatBubbleIcon className="w-5 h-5" />
+                <Mic className="w-5 h-5" />
+              </div>
+              <Badge className="bg-green-500">Live</Badge>
+            </div>
+            <CardTitle className="text-2xl">MTH 242 Study Session</CardTitle>
+            <CardDescription>Join the MTH 242 study session</CardDescription>
+            <Link href="study-groups/session">
+              <Button>Join</Button>
+            </Link>
+          </CardHeader>
+        </Card>
+      </main>
+    </>
   );
 }
 
